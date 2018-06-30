@@ -1,0 +1,12 @@
+#docker stack deploy -c mysql-compose.yml service
+version: '3.1'
+
+services:
+
+  logstash:
+    image: logstash
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+      - /etc/hosts:/etc/hosts
+    environment:
+      'input { stdin { } } output { stdout { } elasticsearch { hosts => ["http://elasticsearch:9200"]} }'
