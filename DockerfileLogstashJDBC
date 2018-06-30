@@ -1,0 +1,7 @@
+#docker build -t my-logstash:latest -f DockerfileLogstashJDBC /root
+FROM logstash:latest
+RUN logstash-plugin install logstash-input-jdbc
+COPY logstash.conf /config-dir/
+COPY mysql-connector-java-5.1.46-bin.jar mysql-connector-java-5.1.46-bin.jar
+CMD ["-f", "/config-dir/logstash.conf"]
+
